@@ -271,6 +271,7 @@ void Menu::exibeMenu6()
         {
                 cout << "Digite o nome do local (UF do Estado ou MDS): ";
                 cin >> nome;
+                getchar();
                 
                 for(int i = 0; i < 28; i++)
                 {
@@ -289,7 +290,7 @@ void Menu::exibeMenu6()
                                         control.consultaInsumos(control.getLocal(i));
 
                                         cout << "\nDigite o nome do insumo: ";
-                                        cin >> nomeInsumo;
+                                        getline(cin, nomeInsumo);
 
                                         for(int j = 0; j < control.retornaInsumos(control.getLocal(i)).size(); j++)
                                         {
