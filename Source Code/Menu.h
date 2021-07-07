@@ -21,7 +21,8 @@ class Menu
 		void exibeMenu5();
 		void exibeMenu6();
 		void exibeMenu7();
+		void voltarMenu();
 
-		Insumo* criacaoInsumo(int);
+		Insumo* criacaoInsumo(int, string);
 		Insumo* criacaoInsumoES(Insumo*);
 };

@@ -11,7 +11,7 @@ class Medicamento : public Insumo
 
 	public:
 		Medicamento();
-		Medicamento(int);
+		Medicamento(int, string, string, string, int, float, string, string, string);
 
 		void setDosagem(string);
 		void setAdministracao(string);
@@ -21,9 +21,7 @@ class Medicamento : public Insumo
 		string getAdministracao();
 		string getDisponibilizacao();
 
-		void lerInsumos(ifstream &fp);
 		void salvarInsumos(ofstream &fp);
 		
 		string getDescricao();
-		void lerAtributos();
 };

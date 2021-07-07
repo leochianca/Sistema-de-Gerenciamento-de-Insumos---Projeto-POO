@@ -3,16 +3,17 @@
 
 Insumo::Insumo() {}
 
-//Construtor que inicia o tipo
-Insumo::Insumo(int tipo)
+//Construtor que inicia os atributos
+Insumo::Insumo(int tipo, string nome, string nomeF, string data, int quant, float valor)
 {
-    nomeProduto = "";
-    dataVencimento = "";
-    nomeFabricante = "";
-    quantidadeItens = 0;
-    valorUnitario = 0.0;
     tipoInsumo = tipo;
+    nomeProduto = nome;
+    nomeFabricante = nomeF;
+    dataVencimento = data;
+    quantidadeItens = quant;
+    valorUnitario = valor;
 }
+
 
 //Retorna a descrição
 string Insumo::getDescricao()
@@ -25,7 +26,7 @@ string Insumo::getDescricao()
     string valor = sstream.str();
     
     string descricao = "Nome: " + nomeProduto + "\nData de vencimento: " + dataVencimento + "\nNome do fabricante: " + nomeFabricante +
-                       "\nQuantidade de itens: " + to_string(quantidadeItens) + "\nValor unitario: R$" + valor + "\nTipo do insumo: " + 
+                       "\nQuantidade de itens: " + to_string(quantidadeItens) + "\nValor unitario: R$ " + valor + "\nTipo do insumo: " + 
                        to_string(tipoInsumo) + "\n";
 
     return descricao;
@@ -93,37 +94,11 @@ void Insumo::addQuantidadeItens(int quantidade)
     quantidadeItens += quantidade;
 }
 
-//Lê os atributos da entrada padrão
-void Insumo::lerAtributos()
-{
-    cout << "Digite o nome: ";
-    getline(cin, nomeProduto);
-
-    cout << "\nDigite o nome do fabricante: ";
-    getline(cin, nomeFabricante);
-
-    cout << "\nDigite a data de vencimento: ";
-    getline(cin, dataVencimento);
-
-    cout << "\nDigite a quantidade de itens: ";
-    cin >> quantidadeItens;
-
-    cout << "\nDigite o valor unitario: ";
-    cin >> valorUnitario;
-}
-
-//Ler e salvar no arquivo
+//Salvar no arquivo
 void Insumo::salvarInsumos(ofstream &fp)
 {
     fp << tipoInsumo << endl << nomeProduto
        << endl << nomeFabricante  << endl 
        << dataVencimento << endl << quantidadeItens 
        << endl << valorUnitario << endl;
-}
-void Insumo::lerInsumos(ifstream &fp)
-{
-    getline(fp, nomeProduto);
-    getline(fp, nomeFabricante);
-    fp >> dataVencimento >> quantidadeItens
-       >> valorUnitario;
 }

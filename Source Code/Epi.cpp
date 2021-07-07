@@ -2,12 +2,14 @@
 
 Epi::Epi() {}
 
-//Construtor que inicia o tipo
-Epi::Epi(int tipo) : Insumo(tipo)
+//Construtor que inicia os atributos
+Epi::Epi(int tipo, string nome, string nomeF, string data, int quant, float valor, string desc, string tipoE)
+: Insumo(tipo, nome, nomeF, data, quant, valor)
 {
-    descricaoEpi = "";
-    tipoEpi = "";
+    descricaoEpi = desc;
+    tipoEpi = tipoE;
 }
+
 
 //Retorna a descrição
 string Epi::getDescricao()
@@ -17,26 +19,7 @@ string Epi::getDescricao()
     return descricao;
 }
 
-//Ler os atributos da entrada padrão
-void Epi::lerAtributos()
-{
-    Insumo::lerAtributos();
-
-    cout << "\nDigite o tipo do Epi: ";
-    getline(cin.ignore(), tipoEpi);
-
-    cout << "\nDigite a descricao do Epi: ";
-    getline(cin, descricaoEpi);
-}
-
-//Ler e salvar no arquivo
-void Epi::lerInsumos(ifstream &fp)
-{
-    Insumo::lerInsumos(fp);
-
-    getline(fp.ignore(), descricaoEpi);
-    getline(fp, tipoEpi);
-}
+//Salvar no arquivo
 void Epi::salvarInsumos(ofstream &fp)
 {
     Insumo::salvarInsumos(fp);

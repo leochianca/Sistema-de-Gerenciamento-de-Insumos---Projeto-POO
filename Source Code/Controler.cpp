@@ -43,22 +43,6 @@ Local& Controler::getLocal(int index)
 //Cadastra os insumos no local do indice [index]
 void Controler::cadastraInsumos(Insumo* insu, int index)
 {
-    if (!retornaInsumos(locais[index]).empty())
-    {
-        for (int i = 0; i < retornaInsumos(locais[index]).size(); i++)
-        {
-            if (insu->getNomeProduto() == retornaInsumos(locais[index])[i]->getNomeProduto())
-            {
-                cout << "\n***Insumo ja encontrado***\n"
-                     << "Adicionando quantidade...\n";
-
-                retornaInsumos(locais[index])[i]->addQuantidadeItens(insu->getQuantidadeItens());
-
-                return;
-            }
-        }
-    }
-
     locais[index].setInsumo(insu);
 }
 

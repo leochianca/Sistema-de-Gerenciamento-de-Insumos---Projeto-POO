@@ -11,7 +11,7 @@ class Vacina : public Insumo
 
 	public:
 		Vacina();
-		Vacina(int);
+		Vacina(int, string, string, string, int, float, int, string, string);
 
 		void setQuantidadeDoses(int);
 		void setIntervalo(string);
@@ -21,9 +21,7 @@ class Vacina : public Insumo
 		string getIntervalo();
 		string getTecnologia();
 
-		void lerInsumos(ifstream &fp);
 		void salvarInsumos(ofstream &fp);
 		
 		string getDescricao();
-		void lerAtributos();
 };

@@ -2,13 +2,15 @@
 
 Vacina::Vacina() {}
 
-//Construtor que inicia o tipo
-Vacina::Vacina(int tipo) : Insumo(tipo)
+//Construtor que inicia os atributos
+Vacina::Vacina(int tipo, string nome, string nomeF, string data, int quant, float valor, int quantD, string inter, string tec)
+: Insumo(tipo, nome, nomeF, data, quant, valor)
 {
-    quantidadeDoses = 0;
-    intervalo = "";
-    tecnologia = "";
+    quantidadeDoses = quantD;
+    intervalo = inter;
+    tecnologia = tec;
 }
+
 
 //Retorna a descrição
 string Vacina::getDescricao()
@@ -24,36 +26,7 @@ string Vacina::getDescricao()
     return descricao;
 }
 
-//Lê os atributos da entrada padrão
-void Vacina::lerAtributos()
-{
-    Insumo::lerAtributos();
-
-    cout << "\nDigite a quantidade de doses: ";
-    cin >> quantidadeDoses;
-    getchar();
-
-    if (quantidadeDoses > 1)
-    {
-        cout << "\nDigite o intervalo entre as doses: ";
-        getline(cin, intervalo);
-    }
-
-    cout << "\nDigite a tecnologia da vacina: ";
-    getline(cin, tecnologia);
-}
-
-//Ler e salvar no arquivo
-void Vacina::lerInsumos(ifstream &fp)
-{
-    Insumo::lerInsumos(fp);
-    
-    getline(fp.ignore(), tecnologia);
-    fp >> quantidadeDoses;
-
-    if(quantidadeDoses > 1)
-        getline(fp.ignore(), intervalo);
-}
+//Salvar no arquivo
 void Vacina::salvarInsumos(ofstream &fp)
 {   
     Insumo::salvarInsumos(fp);

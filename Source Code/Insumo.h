@@ -18,13 +18,11 @@ class Insumo
 
 	public:
 		Insumo();
-		Insumo(int);
+		Insumo(int, string, string, string, int, float);
 
-		virtual void lerInsumos(ifstream &fp);
 		virtual void salvarInsumos(ofstream &fp);
 		
 		virtual string getDescricao();
-		virtual void lerAtributos();
 		string getConsulta();
 
 		string getNomeProduto();
