@@ -40,4 +40,5 @@ class Insumo
 		void setValorUnitario(float);
 
 		void addQuantidadeItens(int);
+		void retiraQuantidadeItens(int);
 };

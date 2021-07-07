@@ -93,6 +93,10 @@ void Insumo::addQuantidadeItens(int quantidade)
 {
     quantidadeItens += quantidade;
 }
+void Insumo::retiraQuantidadeItens(int quantidade)
+{
+    quantidadeItens -= quantidade;
+}
 
 //Salvar no arquivo
 void Insumo::salvarInsumos(ofstream &fp)
