@@ -169,8 +169,9 @@ void Menu::exibeMenu4()
 }
 void Menu::exibeMenu5()
 {
+        int quant;
         string nome, distribuir;
-        bool achouLocal = false;
+        bool achouLocal = false, achouInsumo = false, temInsumo = false;
 
         cout << "Digite o nome do local (UF do Estado) que deseja distribuir os insumos: ";
         getline(cin, nome);
@@ -188,7 +189,54 @@ void Menu::exibeMenu5()
                         cout << "\nDigite o nome do insumo: ";
                         getline(cin, distribuir);
 
-                        control.distribuiInsumos(i, distribuir);
+                        for(int k=0; k<control.retornaInsumos(control.getLocal(0)).size(); k++)
+                        {
+                                if(control.retornaInsumos(control.getLocal(0))[k]->getNomeProduto() == distribuir) 
+                                {
+                                        achouInsumo = true;
+
+                                        cout << "Digite a quantidade a ser distribuida: ";
+                                        cin >> quant;
+
+                                        if(control.retornaInsumos(control.getLocal(0))[k]->getQuantidadeItens() < quant)
+                                        {
+                                                cout << "\nQuantidade indisponivel\n" << "Volte ao Menu e tente novamente\n";
+                                                return;
+                                        }
+
+                                        if(!control.retornaInsumos(control.getLocal(i)).empty())
+                                        {
+                                                for(int j=0; j<control.retornaInsumos(control.getLocal(i)).size(); j++)
+                                                {
+                                                        if(control.retornaInsumos(control.getLocal(i))[j]->getNomeProduto() == distribuir)
+                                                        {
+                                                                temInsumo = true;
+                                                                cout << "\nInsumo ja encontrado\n" << "Adicionando quantidade...\n";
+                                                                control.retornaInsumos(control.getLocal(i))[j]->addQuantidadeItens(quant);
+                                                                control.retornaInsumos(control.getLocal(0))[k]->retiraQuantidadeItens(quant);
+                                                                break;
+                                                        }
+                                                }
+                                        }
+
+                                        if(!temInsumo)
+                                        {
+                                                cout << "\nDistribuindo...\n";
+                                                control.distribuiInsumos(i, distribuir, quant);
+                                        }
+
+                                        if(control.retornaInsumos(control.getLocal(0))[k]->getQuantidadeItens() == 0)
+                                                control.apagaInsumo(control.getLocal(0), control.retornaInsumos(control.getLocal(0))[k]);
+
+                                        return;
+                                }
+                        }
+
+                        if(!achouInsumo)
+                        {
+                                cout << "\nInsumo nao encontrado\n" << "Volte ao Menu e tente novamente\n";
+                                return;
+                        }
                 }
         }
 

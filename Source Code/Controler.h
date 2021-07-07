@@ -20,6 +20,6 @@ class Controler
 
 		vector<Insumo *> retornaInsumos(Local);
 
-		void distribuiInsumos(int, string);
+		void distribuiInsumos(int, string, int);
 		void apagaInsumo(Local&, Insumo*);
 };

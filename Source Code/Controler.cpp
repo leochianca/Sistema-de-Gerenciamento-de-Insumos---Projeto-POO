@@ -83,52 +83,25 @@ vector<Insumo *> Controler::retornaInsumos(Local loc)
 }
 
 //Distribui insumos do Ministerio da Saude para o local do indice [index]
-void Controler::distribuiInsumos(int index, string nome)
+void Controler::distribuiInsumos(int index, string nome, int quant)
 {
     Insumo* insumo;
     Menu menu;
-    int quant, estoque;
-    bool flag = false;
-
+    int estoque;
+    
     for (int i = 0; i < retornaInsumos(locais[0]).size(); i++)
     {
         if (retornaInsumos(locais[0])[i]->getNomeProduto() == nome)
         {
-            flag = true;
-            cout << "\n***Achou INSUMO***\n\n"
-                 << "\nDigite a quantidade a ser distribuida: ";
-            cin >> quant;
-
-            estoque = retornaInsumos(locais[0])[i]->getQuantidadeItens();
-
-            if (estoque < quant)
-            {
-                cout << "\n***Quantidade indisponivel***\n";
-            }
-            else
-            {
-
+                estoque = retornaInsumos(locais[0])[i]->getQuantidadeItens();
                 insumo = retornaInsumos(locais[0])[i];
                 insumo->setQuantidadeItens(quant);
 
-                cout << "\nDistribuindo...\n";
-
                 cadastraInsumos(menu.criacaoInsumoES(insumo), index);
-
                 retornaInsumos(locais[0])[i]->setQuantidadeItens(estoque - quant);
 
-                if(retornaInsumos(locais[0])[i]->getQuantidadeItens() == 0)
-                    apagaInsumo(locais[0], retornaInsumos(locais[0])[i]);
-
                 return;
-            }
         }
-    }
-
-    if (!flag)
-    {
-        cout << "\n***Insumo nao encontrado***\n";
-        return;
     }
 }
 
