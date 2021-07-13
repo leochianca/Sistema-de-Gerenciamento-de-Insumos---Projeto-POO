@@ -24,273 +24,313 @@ void Menu::exibeMenu()
              << "[7] - Salvar insumos" << endl
              << "---------------------------------------------------------------------------" << endl;
 }
-void Menu::voltarMenu()
-{
-        int opcao;
-
-        while(true)
-        {
-                cout << "\n[1] - Voltar ao menu\n";
-                cin >> opcao;
-                
-                if(opcao == 1)
-                {
-                        system("clear");
-                        return;
-                }
-                else    cout << "\n***Opcao invalida***";
-        }
-}
 void Menu::exibeMenu1()
 {
         int tipo;
+        char opcao, cadastrarNovamente = 'S';
         string nomeProduto;
-        char opcao;
-        bool achouInsumo = false;
 
-        cout << "Tipos de insumo disponiveis\n\n" << "[1] - Vacina\n"
-                << "[2] - Medicamento\n" << "[3] - Epi\n\n" << "Digite o tipo de insumo: ";
-        cin >> tipo;
-        getchar();
-
-        system("clear");
-
-        if(tipo >= 1 && tipo <= 3)
+        while(toupper(cadastrarNovamente) == 'S')
         {
-                cout << "Digite o nome: ";
-                getline(cin, nomeProduto);
+                bool achouInsumo = false;
+                
+                cout << "Tipos de insumo disponiveis\n\n" << "[1] - Vacina\n"
+                        << "[2] - Medicamento\n" << "[3] - Epi\n\n" << "Digite o tipo de insumo: ";
+                cin >> tipo;
+                getchar();
 
-                if(!control.retornaInsumos(control.getLocal(0)).empty())
+                system("clear");
+
+                if(tipo >= 1 && tipo <= 3)
                 {
-                        for(int i=0; i<control.retornaInsumos(control.getLocal(0)).size(); i++)
+                        cout << "Digite o nome: ";
+                        getline(cin, nomeProduto);
+
+                        if(!control.retornaInsumos(control.getLocal(0)).empty())
                         {
-                                if(control.retornaInsumos(control.getLocal(0))[i]->getNomeProduto() == nomeProduto)
+                                for(int i=0; i<control.retornaInsumos(control.getLocal(0)).size(); i++)
                                 {
-                                        achouInsumo = true;
-                                        
-                                        cout << "\nInsumo ja encontrado\n" << "Deseja adicionar quantidade?[S/N] ";
-                                        cin >> opcao;
-
-                                        if(toupper(opcao) == 'S')
+                                        if(control.retornaInsumos(control.getLocal(0))[i]->getNomeProduto() == nomeProduto)
                                         {
-                                                int quant;
+                                                achouInsumo = true;
                                                 
-                                                cout << "\nDigite a quantidade: ";
-                                                cin >> quant;
+                                                cout << "\nInsumo ja encontrado\n" << "Deseja adicionar quantidade?[S/N] ";
+                                                cin >> opcao;
 
-                                                cout << "\nAdicionando quantidade...\n";
-                                                control.retornaInsumos(control.getLocal(0))[i]->addQuantidadeItens(quant);
+                                                if(toupper(opcao) == 'S')
+                                                {
+                                                        int quant;
+                                                        
+                                                        cout << "\nDigite a quantidade: ";
+                                                        cin >> quant;
+
+                                                        cout << "\nAdicionando quantidade...\n";
+                                                        control.retornaInsumos(control.getLocal(0))[i]->addQuantidadeItens(quant);
+                                                }
+                                                
+                                                break;
                                         }
-                                        
-                                        break;
                                 }
                         }
+                        
+                        if(!achouInsumo) control.cadastraInsumos(criacaoInsumo(tipo, nomeProduto), 0);
                 }
-                
-                if(!achouInsumo) control.cadastraInsumos(criacaoInsumo(tipo, nomeProduto), 0);
+                else cout << "***Tipo invalido***\n";
+
+                cout << "\nDeseja cadastrar outro insumo?[S/N] ";
+                cin >> cadastrarNovamente;
+                system("clear");
         }
-        else cout << "***Tipo invalido***\n";
 }
 void Menu::exibeMenu2()
 {
         string nome;
-        bool achouLocal = false;
+        char consultaNovamente = 'S';
 
-        cout << "Digite o nome do local (UF do Estado ou Ministerio da Saude): ";
-        getline(cin, nome);
-        cout << endl;
-
-        for (int i = 0; i < 28; i++)
+        while(toupper(consultaNovamente) == 'S')
         {
-                if (control.getLocal(i).getNome() == nome)
+                bool achouLocal = false;
+                
+                cout << "Digite o nome do local (UF do Estado ou Ministerio da Saude): ";
+                getline(cin, nome);
+                cout << endl;
+
+                for (int i = 0; i < 28; i++)
                 {
-                        achouLocal = true;
+                        if (control.getLocal(i).getNome() == nome)
+                        {
+                                achouLocal = true;
 
-                        if(control.retornaInsumos(control.getLocal(i)).empty()) cout << "***Este local nao tem insumos***\n";
-                        else control.consultaInsumos(control.getLocal(i));
+                                if(control.retornaInsumos(control.getLocal(i)).empty()) cout << "***Este local nao tem insumos***\n\n";
+                                else control.consultaInsumos(control.getLocal(i));
+                        }
                 }
-        }
 
-        if(!achouLocal) cout << "***Local nao encontrado***\n";
+                if(!achouLocal) cout << "***Local nao encontrado***\n\n";
+
+                cout << "Deseja consultar outro local?[S/N] ";
+                cin >> consultaNovamente;
+                getchar();
+                system("clear");
+        }
 }
 void Menu::exibeMenu3()
 {
         string nome;
-        bool achouLocal = false;
+        char consultaNovamente = 'S';
 
-        cout << "Digite o nome do local (UF do Estado ou Ministerio da Saude): ";
-        getline(cin, nome);
-        cout << endl;
-
-        for (int i = 0; i < 28; i++)
+        while(toupper(consultaNovamente) == 'S')
         {
-                if (control.getLocal(i).getNome() == nome)
+                bool achouLocal = false;
+                
+                cout << "Digite o nome do local (UF do Estado ou Ministerio da Saude): ";
+                getline(cin, nome);
+                cout << endl;
+
+                for (int i = 0; i < 28; i++)
                 {
-                        achouLocal = true;
+                        if (control.getLocal(i).getNome() == nome)
+                        {
+                                achouLocal = true;
 
-                        if(control.retornaInsumos(control.getLocal(i)).empty()) cout << "***Este local nao tem insumos***\n";
-                        else control.consultaInsumosDescricao(control.getLocal(i));
+                                if(control.retornaInsumos(control.getLocal(i)).empty()) cout << "***Este local nao tem insumos***\n\n";
+                                else control.consultaInsumosDescricao(control.getLocal(i));
+                        }
                 }
-        }
 
-        if(!achouLocal) cout << "***Local nao encontrado***\n";
+                if(!achouLocal) cout << "***Local nao encontrado***\n\n";
+
+                cout << "Deseja consultar outro local?[S/N] ";
+                cin >> consultaNovamente;
+                getchar();
+                system("clear");
+        }
 }
 void Menu::exibeMenu4()
 {
         string nome;
+        char consultaNovamente = 'S';
         int tipo;
-        bool achouLocal = false;
 
-        cout << "Digite o nome do local (UF do Estado ou Ministerio da Saude): ";
-        getline(cin, nome);
-        cout << endl;
-
-        for (int i = 0; i < 28; i++)
+        while(toupper(consultaNovamente) == 'S')
         {
-                if (control.getLocal(i).getNome() == nome)
+                bool achouLocal = false;
+                
+                cout << "Digite o nome do local (UF do Estado ou Ministerio da Saude): ";
+                getline(cin, nome);
+                cout << endl;
+
+                for (int i = 0; i < 28; i++)
                 {
-                        achouLocal = true;
-
-                        if(control.retornaInsumos(control.getLocal(i)).empty()) cout << "***Este local nao tem insumos***\n";
-                        else
+                        if (control.getLocal(i).getNome() == nome)
                         {
-                                cout << "Digite o tipo de insumo que deseja consultar: \n"
-                                << "\n[1] - Vacina\n" << "[2] - Medicamento\n" << "[3] - Epi\n" << endl;
+                                achouLocal = true;
 
-                                cin >> tipo;
-                                cout << endl;
-                                
-                                control.consultaInsumosTipo(control.getLocal(i), tipo);
+                                if(control.retornaInsumos(control.getLocal(i)).empty()) cout << "***Este local nao tem insumos***\n\n";
+                                else
+                                {
+                                        cout << "Digite o tipo de insumo que deseja consultar: \n"
+                                        << "\n[1] - Vacina\n" << "[2] - Medicamento\n" << "[3] - Epi\n" << endl;
+
+                                        cin >> tipo;
+                                        cout << endl;
+                                        
+                                        control.consultaInsumosTipo(control.getLocal(i), tipo);
+                                }
                         }
                 }
-        }
 
-        if(!achouLocal) cout << "***Local nao encontrado***\n";
+                if(!achouLocal) cout << "***Local nao encontrado***\n\n";
+
+                cout << "Deseja consultar outro local?[S/N] ";
+                cin >> consultaNovamente;
+                getchar();
+                system("clear");
+        }
 }
 void Menu::exibeMenu5()
 {
         int quant;
         string nome, distribuir;
-        bool achouLocal = false, achouInsumo = false, temInsumo = false;
+        char distribuiNovamente = 'S';
 
-        cout << "Digite o nome do local (UF do Estado) que deseja distribuir os insumos: ";
-        getline(cin, nome);
-
-        for (int i = 1; i < 28; i++)
+        while(toupper(distribuiNovamente) == 'S')
         {
-                if (control.getLocal(i).getNome() == nome)
-                {   
-                        achouLocal = true;
+                bool achouLocal = false, achouInsumo = false, temInsumo = false;
+                
+                cout << "Digite o nome do local (UF do Estado) que deseja distribuir os insumos: ";
+                getline(cin, nome);
 
-                        cout << endl << "Os insumos disponiveis no Ministerio da Saude sao: \n" << endl;
-
-                        control.consultaInsumos(control.getLocal(0));
-                        
-                        cout << "\nDigite o nome do insumo: ";
-                        getline(cin, distribuir);
-
-                        for(int k=0; k<control.retornaInsumos(control.getLocal(0)).size(); k++)
-                        {
-                                if(control.retornaInsumos(control.getLocal(0))[k]->getNomeProduto() == distribuir) 
-                                {
-                                        achouInsumo = true;
-
-                                        cout << "Digite a quantidade a ser distribuida: ";
-                                        cin >> quant;
-
-                                        if(control.retornaInsumos(control.getLocal(0))[k]->getQuantidadeItens() < quant)
-                                        {
-                                                cout << "\nQuantidade indisponivel\n" << "Volte ao Menu e tente novamente\n";
-                                                return;
-                                        }
-
-                                        if(!control.retornaInsumos(control.getLocal(i)).empty())
-                                        {
-                                                for(int j=0; j<control.retornaInsumos(control.getLocal(i)).size(); j++)
-                                                {
-                                                        if(control.retornaInsumos(control.getLocal(i))[j]->getNomeProduto() == distribuir)
-                                                        {
-                                                                temInsumo = true;
-                                                                cout << "\nInsumo ja encontrado\n" << "Adicionando quantidade...\n";
-                                                                control.retornaInsumos(control.getLocal(i))[j]->addQuantidadeItens(quant);
-                                                                control.retornaInsumos(control.getLocal(0))[k]->retiraQuantidadeItens(quant);
-                                                                break;
-                                                        }
-                                                }
-                                        }
-
-                                        if(!temInsumo)
-                                        {
-                                                cout << "\nDistribuindo...\n";
-                                                control.distribuiInsumos(i, distribuir, quant);
-                                        }
-
-                                        if(control.retornaInsumos(control.getLocal(0))[k]->getQuantidadeItens() == 0)
-                                                control.apagaInsumo(control.getLocal(0), control.retornaInsumos(control.getLocal(0))[k]);
-
-                                        return;
-                                }
-                        }
-
-                        if(!achouInsumo)
-                        {
-                                cout << "\nInsumo nao encontrado\n" << "Volte ao Menu e tente novamente\n";
-                                return;
-                        }
-                }
-        }
-
-        if(!achouLocal) cout << "\n***Local nao encontrado***\n";
-}
-void Menu::exibeMenu6()
-{
-        string nome, nomeInsumo;
-        bool achouLocal = false, achouInsumo = false;
-        
-        cout << "Digite o nome do local (UF do Estado ou MDS): ";
-        cin >> nome;
-        getchar();
-        
-        for(int i = 0; i < 28; i++)
-        {
-                if(control.getLocal(i).getNome() == nome)
+                for (int i = 1; i < 28; i++)
                 {
-                        achouLocal = true;
+                        if (control.getLocal(i).getNome() == nome)
+                        {   
+                                achouLocal = true;
 
-                        if(control.retornaInsumos(control.getLocal(i)).empty())
-                        {
-                                cout << "\n***Este local nao tem insumos***\n";
-                        }
-                        else
-                        {
-                                cout << "\nOs insumos disponiveis no local sao: \n\n";
+                                cout << endl << "Os insumos disponiveis no Ministerio da Saude sao: \n" << endl;
 
-                                control.consultaInsumos(control.getLocal(i));
-
+                                control.consultaInsumos(control.getLocal(0));
+                                
                                 cout << "\nDigite o nome do insumo: ";
-                                getline(cin, nomeInsumo);
+                                getline(cin, distribuir);
 
-                                for(int j = 0; j < control.retornaInsumos(control.getLocal(i)).size(); j++)
+                                for(int k=0; k<control.retornaInsumos(control.getLocal(0)).size(); k++)
                                 {
-                                        if(control.retornaInsumos(control.getLocal(i))[j]->getNomeProduto() == nomeInsumo)
+                                        if(control.retornaInsumos(control.getLocal(0))[k]->getNomeProduto() == distribuir) 
                                         {
                                                 achouInsumo = true;
 
-                                                cout << "\nApagando...\n";
-                                                control.apagaInsumo(control.getLocal(i), control.retornaInsumos(control.getLocal(i))[j]); 
+                                                cout << "Digite a quantidade a ser distribuida: ";
+                                                cin >> quant;
+
+                                                if(control.retornaInsumos(control.getLocal(0))[k]->getQuantidadeItens() < quant)
+                                                {
+                                                        cout << "\nQuantidade indisponivel\n";
+                                                        break;
+                                                }
+
+                                                if(!control.retornaInsumos(control.getLocal(i)).empty())
+                                                {
+                                                        for(int j=0; j<control.retornaInsumos(control.getLocal(i)).size(); j++)
+                                                        {
+                                                                if(control.retornaInsumos(control.getLocal(i))[j]->getNomeProduto() == distribuir)
+                                                                {
+                                                                        temInsumo = true;
+                                                                        cout << "\nInsumo ja encontrado\n" << "Adicionando quantidade...\n";
+                                                                        control.retornaInsumos(control.getLocal(i))[j]->addQuantidadeItens(quant);
+                                                                        control.retornaInsumos(control.getLocal(0))[k]->retiraQuantidadeItens(quant);
+                                                                        break;
+                                                                }
+                                                        }
+                                                }
+
+                                                if(!temInsumo)
+                                                {
+                                                        cout << "\nDistribuindo...\n";
+                                                        control.distribuiInsumos(i, distribuir, quant);
+                                                }
+
+                                                if(control.retornaInsumos(control.getLocal(0))[k]->getQuantidadeItens() == 0)
+                                                        control.apagaInsumo(control.getLocal(0), control.retornaInsumos(control.getLocal(0))[k]);
 
                                                 break;
                                         }
                                 }
 
-                                if(!achouInsumo) cout << "\n***Insumo nao encontrado***\n";
+                                if(!achouInsumo)
+                                {
+                                        cout << "\nInsumo nao encontrado\n";
+                                        break;
+                                }
                         }
-
-                        break;
                 }
-        }
 
-        if(!achouLocal) cout << "\n***Local nao encontrado***\n";  
+                if(!achouLocal) cout << "\n***Local nao encontrado***\n";
+
+                cout << "\nDeseja distribuir novamente?[S/N] ";
+                cin >> distribuiNovamente;
+                getchar();
+                system("clear");
+        }
+}
+void Menu::exibeMenu6()
+{
+        string nome, nomeInsumo;
+        char apagaNovamente = 'S';
+        
+        while(toupper(apagaNovamente) == 'S')
+        {
+                bool achouLocal = false, achouInsumo = false;
+                
+                cout << "Digite o nome do local (UF do Estado ou MDS): ";
+                getline(cin, nome);
+
+                for(int i = 0; i < 28; i++)
+                {
+                        if(control.getLocal(i).getNome() == nome)
+                        {
+                                achouLocal = true;
+
+                                if(control.retornaInsumos(control.getLocal(i)).empty())
+                                {
+                                        cout << "\n***Este local nao tem insumos***\n";
+                                }
+                                else
+                                {
+                                        cout << "\nOs insumos disponiveis no local sao: \n\n";
+
+                                        control.consultaInsumos(control.getLocal(i));
+
+                                        cout << "\nDigite o nome do insumo: ";
+                                        getline(cin, nomeInsumo);
+
+                                        for(int j = 0; j < control.retornaInsumos(control.getLocal(i)).size(); j++)
+                                        {
+                                                if(control.retornaInsumos(control.getLocal(i))[j]->getNomeProduto() == nomeInsumo)
+                                                {
+                                                        achouInsumo = true;
+
+                                                        cout << "\nApagando...\n";
+                                                        control.apagaInsumo(control.getLocal(i), control.retornaInsumos(control.getLocal(i))[j]); 
+
+                                                        break;
+                                                }
+                                        }
+
+                                        if(!achouInsumo) cout << "\n***Insumo nao encontrado***\n";
+                                }
+
+                                break;
+                        }
+                }
+
+                if(!achouLocal) cout << "\n***Local nao encontrado***\n";
+
+                cout << "\nDeseja apagar outro insumo?[S/N] ";
+                cin >> apagaNovamente;
+                getchar();
+                system("clear");
+        }
 }
 void Menu::exibeMenu7()
 {

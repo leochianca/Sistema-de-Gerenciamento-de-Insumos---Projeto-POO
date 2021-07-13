@@ -55,8 +55,6 @@ int main()
                     menu.exibeMenu7();
                     break;
             }
-
-            menu.voltarMenu();
         }
     }
 
