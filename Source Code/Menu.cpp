@@ -2,6 +2,7 @@
 #include "Vacina.h"
 #include "Medicamento.h"
 #include "Epi.h"
+#include <algorithm>
 
 Menu::Menu()
 {
@@ -95,6 +96,8 @@ void Menu::exibeMenu2()
                 getline(cin, nome);
                 cout << endl;
 
+                transform(nome.begin(), nome.end(), nome.begin(), ::toupper);
+
                 for (int i = 0; i < 28; i++)
                 {
                         if (control.getLocal(i).getNome() == nome)
@@ -126,6 +129,8 @@ void Menu::exibeMenu3()
                 cout << "Digite o nome do local (UF do Estado ou Ministerio da Saude): ";
                 getline(cin, nome);
                 cout << endl;
+
+                transform(nome.begin(), nome.end(), nome.begin(), ::toupper);
 
                 for (int i = 0; i < 28; i++)
                 {
@@ -159,6 +164,8 @@ void Menu::exibeMenu4()
                 cout << "Digite o nome do local (UF do Estado ou Ministerio da Saude): ";
                 getline(cin, nome);
                 cout << endl;
+
+                transform(nome.begin(), nome.end(), nome.begin(), ::toupper);
 
                 for (int i = 0; i < 28; i++)
                 {
@@ -200,6 +207,8 @@ void Menu::exibeMenu5()
                 
                 cout << "Digite o nome do local (UF do Estado) que deseja distribuir os insumos: ";
                 getline(cin, nome);
+
+                transform(nome.begin(), nome.end(), nome.begin(), ::toupper);
 
                 for (int i = 1; i < 28; i++)
                 {
@@ -285,6 +294,8 @@ void Menu::exibeMenu6()
                 cout << "Digite o nome do local (UF do Estado ou MDS): ";
                 getline(cin, nome);
 
+                transform(nome.begin(), nome.end(), nome.begin(), ::toupper);
+
                 for(int i = 0; i < 28; i++)
                 {
                         if(control.getLocal(i).getNome() == nome)
@@ -336,7 +347,9 @@ void Menu::exibeMenu7()
 {
         for(int i = 0; i < 28; i++)     salvarArquivo(control.retornaInsumos(control.getLocal(i)), control.getLocal(i));
 
-        cout << "Salvando...\n";
+        cout << "Salvando...\n\n" << "Pressione Enter para voltar ao Menu\n";
+        getchar();
+        system("clear");
 }
 
 //Cria um novo insumo para o Ministerio da Saude
