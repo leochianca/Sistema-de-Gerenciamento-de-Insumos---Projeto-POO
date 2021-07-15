@@ -1,4 +1,7 @@
 #include "Controler.h"
+#include "Vacina.h"
+#include "Medicamento.h"
+#include "Epi.h"
 
 #pragma once
 
@@ -10,8 +13,7 @@ class Menu
 	public:
 		Menu();
 
-		void lerArquivo();
-		void salvarArquivo(vector<Insumo*>, Local);
+		Controler& getControl();
 
 		void exibeMenu();
 		void exibeMenu1();

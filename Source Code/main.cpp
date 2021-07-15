@@ -1,10 +1,12 @@
 #include "Menu.h"
+#include "Persistencia.h"
 
 int main()
 {
     Menu menu;
+    Persistencia pers;
 
-    menu.lerArquivo();
+    pers.lerArquivo(menu.getControl());
 
     while (true)
     {
