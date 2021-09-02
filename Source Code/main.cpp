@@ -15,7 +15,7 @@ int main()
         int opcao, opcao2;
 
         cin >> opcao;
-        system("clear");
+        system("CLS");
 
         if (opcao == 0)
             break;
@@ -23,7 +23,7 @@ int main()
         cout << "[1] - Confirmar\n" << "[2] - Voltar ao menu\n\n";
         cin >> opcao2;
         getchar();
-        system("clear");
+        system("CLS");
 
         if(opcao2 == 1)
         {

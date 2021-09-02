@@ -38,7 +38,7 @@ void Menu::exibeMenu1()
                 cin >> tipo;
                 getchar();
 
-                system("clear");
+                system("CLS");
 
                 if(tipo >= 1 && tipo <= 3)
                 {
@@ -78,7 +78,7 @@ void Menu::exibeMenu1()
 
                 cout << "\nDeseja cadastrar outro insumo?[S/N] ";
                 cin >> cadastrarNovamente;
-                system("clear");
+                system("CLS");
         }
 }
 void Menu::exibeMenu2()
@@ -112,7 +112,7 @@ void Menu::exibeMenu2()
                 cout << "Deseja consultar outro local?[S/N] ";
                 cin >> consultaNovamente;
                 getchar();
-                system("clear");
+                system("CLS");
         }
 }
 void Menu::exibeMenu3()
@@ -146,7 +146,7 @@ void Menu::exibeMenu3()
                 cout << "Deseja consultar outro local?[S/N] ";
                 cin >> consultaNovamente;
                 getchar();
-                system("clear");
+                system("CLS");
         }
 }
 void Menu::exibeMenu4()
@@ -190,7 +190,7 @@ void Menu::exibeMenu4()
                 cout << "Deseja consultar outro local?[S/N] ";
                 cin >> consultaNovamente;
                 getchar();
-                system("clear");
+                system("CLS");
         }
 }
 void Menu::exibeMenu5()
@@ -277,7 +277,7 @@ void Menu::exibeMenu5()
                 cout << "\nDeseja distribuir novamente?[S/N] ";
                 cin >> distribuiNovamente;
                 getchar();
-                system("clear");
+                system("CLS");
         }
 }
 void Menu::exibeMenu6()
@@ -338,7 +338,7 @@ void Menu::exibeMenu6()
                 cout << "\nDeseja apagar outro insumo?[S/N] ";
                 cin >> apagaNovamente;
                 getchar();
-                system("clear");
+                system("CLS");
         }
 }
 void Menu::exibeMenu7()
@@ -349,7 +349,7 @@ void Menu::exibeMenu7()
 
         cout << "Salvando...\n\n" << "Pressione Enter para voltar ao Menu\n";
         getchar();
-        system("clear");
+        system("CLS");
 }
 
 //Cria um novo insumo para o Ministerio da Saude
